@@ -74,6 +74,9 @@ setBalance(newRunningBalance.toString());
   const deleteItem = (item) =>{
      const filteredItems = list.filter((list) => list.id !== item.id);
      SetList(filteredItems);
+     const deletedAmount = parseFloat(item.amount);
+     const newbalance = parseFloat(balance) + deletedAmount;
+     setBalance(newbalance.toString());
   }
 
 
