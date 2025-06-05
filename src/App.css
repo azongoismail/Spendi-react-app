@@ -6,6 +6,6 @@ body {
     background: #EBFCFF;
     display: flex;
     justify-content: center;
-    align-items: center;
-    min-height: 0vh;
+    align-items:start;
+    /* min-height: 0vh; */
 }

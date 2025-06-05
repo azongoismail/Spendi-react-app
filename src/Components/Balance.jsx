@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Balance = () => {
+const Balance = ({balance}) => {
   return (
     <div>
-      
+      <p>Balance: ${balance}</p>
     </div>
   )
 }

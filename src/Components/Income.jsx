@@ -1,15 +1,26 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react';
 import { FaTrash } from "react-icons/fa6";
+import Balance from './Balance';
 
 
 
 const Income = () => {
     const [income, setIncome] = useState()
     const [totalIncome, setTotalIncome] = useState('')
+    const [balance, setBalance] = useState('')
     const [ list, SetList] = useState([]);
     const [ amount, setAmount] = useState('')
     const [ item, setItem] = useState ('')
+
+
+    useEffect(()=>{
+      const numericTotalIncome = parseFloat(totalIncome);
+      if (!isNaN(numericTotalIncome)) {
+     setBalance(numericTotalIncome.toString());
+   }
+
+    }, [totalIncome]) 
 
     const handleChange = (e) => {
           setIncome(
@@ -42,7 +53,24 @@ const Income = () => {
         ));
         setAmount('')
         setItem('')
+ 
+ const numericCurrentBalance = parseFloat(balance);
+ const numericAmount = parseFloat(amount);
+
+ if (isNaN(numericCurrentBalance) || isNaN(numericAmount) || numericAmount <= 0) {
+  console.error("Invalid current balance or expense amount.");
+  return;
+}
+
+const newRunningBalance = numericCurrentBalance - numericAmount;
+setBalance(newRunningBalance.toString());
+
+    
     }
+
+
+   
+   
   const deleteItem = (item) =>{
      const filteredItems = list.filter((list) => list.id !== item.id);
      SetList(filteredItems);
@@ -50,7 +78,7 @@ const Income = () => {
 
 
   return (
-    <div class= "bg-[#EFEDCE] h-[30vh] flex justify-center items-center flex-col">
+    <div class= "bg-[#EFEDCE] h-[100vh] flex justify-start items-center flex-col">
       <p>Income:<span>${totalIncome}</span></p>
       <form action="" onSubmit={handleIncomeSubmit}>
         <input value={income} type="text" onChange={handleChange} class="bg-white p-3 mr-2" />
@@ -66,17 +94,18 @@ const Income = () => {
       {
         <div className='flex gap-5'>
         <ul>
-          {list.map((list) =>(
-            <li key={list.id} className='flex items-center justify-around bg-[#2BA3EC] px-4 py-2 mt-2'>
-              <span>{list.name}</span>
-              <span>{list.amount}</span>
+          {list.map((list) => (
+            <li key={list.id} className='flex items-center justify-between  bg-[#2BA3EC] px-4 py-2 mt-2 w-[50vw] rounded-8'>
+              <span className='text-xl '>{list.name}</span>
+              <span className='text-lg'>${list.amount}</span>
               <FaTrash onClick={()=> deleteItem(list)} style={{ fontSize:'20px', color:'white'}} />
-              
+
             </li>
            ))}
         </ul>
         </div>
       }
+      <Balance balance={balance} />
      
     </div>
   )
