@@ -84,6 +84,9 @@ setTotalExpenses(preTotal => preTotal + newAmount);
      const deletedAmount = parseFloat(item.amount);
      const newbalance = parseFloat(balance) + deletedAmount;
      setBalance(newbalance.toString());
+     const deletedSpending = parseFloat(item.amount)
+     const newTotal = parseFloat(totalExpenses) - deletedSpending;
+     setTotalExpenses(newTotal);
 
   }
 
@@ -103,7 +106,7 @@ setTotalExpenses(preTotal => preTotal + newAmount);
           <h2>Expenses</h2>
         <input type="text" value={item} class=" bg-white p-3 mr-3" placeholder='item' onChange={(e) => setItem(e.target.value)} />
         <input type="number" value={amount} class=" bg-white p-3 mr-3" placeholder='amount' onChange={(e) => setAmount(e.target.value)}/>
-        <button className="p-3 w-[32vw] ">+</button>
+        <button className="p-3 text-5xl">+</button>
       </form>
 
       {
