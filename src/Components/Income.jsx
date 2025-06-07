@@ -96,17 +96,17 @@ setTotalExpenses(preTotal => preTotal + newAmount);
     <>
     <div class= "bg-[#EFEDCE] h-[100%] w-[50vw]  mx-auto my-4 flex justify-start items-center flex-col shadow-4xl rounded-2xl gap-10">
         <p>Income:<span>${totalIncome}</span></p>
-      <form action="" onSubmit={handleIncomeSubmit} className='flex flex-col gap-5'>
+      <form action="" onSubmit={handleIncomeSubmit} className='flex flex-col gap-5 items-center'>
         
         <input value={income} type="text" onChange={handleChange} class="bg-white p-3 mr-2" />
-        <button class="p-3 text-5xl">+</button>
+        <button class="p-3 text-5xl w-[20vw] p-3 rounded-none ">Enter Income</button>
       </form>
     
       <form action="" onSubmit={handleExpensesSubmit} className='flex flex-col gap-5 my-4 items-center'>
           <h2>Expenses</h2>
         <input type="text" value={item} class=" bg-white p-3 mr-3" placeholder='item' onChange={(e) => setItem(e.target.value)} />
         <input type="number" value={amount} class=" bg-white p-3 mr-3" placeholder='amount' onChange={(e) => setAmount(e.target.value)}/>
-        <button className="p-3 text-5xl">+</button>
+        <button className="p-3 text-5xl w-[20vw] p-3 rounded-none ">Add Item</button>
       </form>
 
       {
