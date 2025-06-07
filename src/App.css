@@ -9,3 +9,12 @@ body {
     align-items:start;
     min-height: 0vh;
 }
+
+.add-item-btn, .add-income-btn{
+    background: #2BA3EC;
+    border-radius: none;
+    border: none;
+    color:white;
+    padding: 16px;
+    outline: none;
+}
