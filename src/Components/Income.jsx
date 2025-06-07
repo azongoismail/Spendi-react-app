@@ -9,6 +9,8 @@ const Income = () => {
     const [income, setIncome] = useState()
     const [totalIncome, setTotalIncome] = useState('')
     const [balance, setBalance] = useState('')
+    const [totalExpenses, setTotalExpenses] = useState(0)
+    // const [initialSpending, setInitialSpending] = useState([])
     const [ list, SetList] = useState([]);
     const [ amount, setAmount] = useState('')
     const [ item, setItem] = useState ('')
@@ -65,6 +67,11 @@ const Income = () => {
 const newRunningBalance = numericCurrentBalance - numericAmount;
 setBalance(newRunningBalance.toString());
 
+const newAmount  = parseFloat(amount);
+setTotalExpenses(preTotal => preTotal + newAmount);
+
+
+
     
     }
 
@@ -77,21 +84,26 @@ setBalance(newRunningBalance.toString());
      const deletedAmount = parseFloat(item.amount);
      const newbalance = parseFloat(balance) + deletedAmount;
      setBalance(newbalance.toString());
+
   }
 
 
+
   return (
-    <div class= "bg-[#EFEDCE] h-[100vh] flex justify-start items-center flex-col">
-      <p>Income:<span>${totalIncome}</span></p>
-      <form action="" onSubmit={handleIncomeSubmit}>
+    <>
+    <div class= "bg-[#EFEDCE] h-[100%] w-[50vw]  mx-auto my-4 flex justify-start items-center flex-col shadow-4xl rounded-2xl gap-10">
+        <p>Income:<span>${totalIncome}</span></p>
+      <form action="" onSubmit={handleIncomeSubmit} className='flex flex-col gap-5'>
+        
         <input value={income} type="text" onChange={handleChange} class="bg-white p-3 mr-2" />
         <button class="p-3 text-5xl">+</button>
       </form>
-      <h2>Expenses</h2>
-      <form action="" onSubmit={handleExpensesSubmit}>
+    
+      <form action="" onSubmit={handleExpensesSubmit} className='flex flex-col gap-5 my-4 items-center'>
+          <h2>Expenses</h2>
         <input type="text" value={item} class=" bg-white p-3 mr-3" placeholder='item' onChange={(e) => setItem(e.target.value)} />
         <input type="number" value={amount} class=" bg-white p-3 mr-3" placeholder='amount' onChange={(e) => setAmount(e.target.value)}/>
-        <button class="p-3 ">+</button>
+        <button className="p-3 w-[32vw] ">+</button>
       </form>
 
       {
@@ -102,16 +114,18 @@ setBalance(newRunningBalance.toString());
               <span className='text-xl '>{list.name}</span>
               <span className='text-lg'>${list.amount}</span>
               <FaTrash onClick={()=> deleteItem(list)} style={{ fontSize:'20px', color:'white'}} />
-
             </li>
            ))}
         </ul>
         </div>
       }
-      <Balance balance={balance} />
+      
      
     </div>
+    <Balance balance={balance} totalExpenses={totalExpenses} />
+    </>
   )
+
 }
 
 export default Income;

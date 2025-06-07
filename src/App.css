@@ -7,5 +7,5 @@ body {
     display: flex;
     justify-content: center;
     align-items:start;
-    /* min-height: 0vh; */
+    min-height: 0vh;
 }
