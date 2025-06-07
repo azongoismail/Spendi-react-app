@@ -10,7 +10,6 @@ const Income = () => {
     const [totalIncome, setTotalIncome] = useState('')
     const [balance, setBalance] = useState('')
     const [totalExpenses, setTotalExpenses] = useState(0)
-    // const [initialSpending, setInitialSpending] = useState([])
     const [ list, SetList] = useState([]);
     const [ amount, setAmount] = useState('')
     const [ item, setItem] = useState ('')
@@ -33,8 +32,6 @@ const Income = () => {
    
     const handleIncomeSubmit = (event) =>{
         event.preventDefault();
-        console.log('hello');
-
         const totalIncome = income;
         setTotalIncome(totalIncome);
         console.log(totalIncome)
@@ -69,9 +66,6 @@ setBalance(newRunningBalance.toString());
 
 const newAmount  = parseFloat(amount);
 setTotalExpenses(preTotal => preTotal + newAmount);
-
-
-
     
     }
 
@@ -94,18 +88,18 @@ setTotalExpenses(preTotal => preTotal + newAmount);
 
   return (
     <>
-    <div class= "bg-[#EFEDCE] h-[100%] w-[50vw]  mx-auto my-4 flex justify-start items-center flex-col shadow-4xl rounded-2xl gap-10">
+    <div className= "bg-[#EFEDCE] h-[100%] w-[50vw]  mx-auto my-4 flex justify-start items-center flex-col shadow-4xl rounded-2xl gap-10">
         <p>Income:<span>${totalIncome}</span></p>
       <form action="" onSubmit={handleIncomeSubmit} className='flex flex-col gap-5 items-center' >
         
-        <input value={income} type="text" onChange={handleChange} class="bg-white p-3 mr-2" placeholder="enter income" />
+        <input value={income} type="text" onChange={handleChange} className="bg-white p-3 mr-2" placeholder="enter income" />
         <button className="add-income-btn ">Enter Income</button>
       </form>
     
       <form action="" onSubmit={handleExpensesSubmit} className='flex flex-col gap-5 my-4 items-center'>
           <h2>Expenses</h2>
-        <input type="text" value={item} class=" bg-white p-3 mr-3" placeholder=' add item' onChange={(e) => setItem(e.target.value)} />
-        <input type="number" value={amount} class=" bg-white p-3 mr-3" placeholder='enter amount' onChange={(e) => setAmount(e.target.value)}/>
+        <input type="text" value={item} className=" bg-white p-3 mr-3" placeholder=' add item' onChange={(e) => setItem(e.target.value)} />
+        <input type="number" value={amount} className=" bg-white p-3 mr-3" placeholder='enter amount' onChange={(e) => setAmount(e.target.value)}/>
         <button className="add-item-btn">Add Item</button>
       </form>
 
