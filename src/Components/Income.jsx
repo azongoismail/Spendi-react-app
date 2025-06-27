@@ -9,7 +9,7 @@ const Income = () => {
     const [income, setIncome] = useState()
     const [totalIncome, setTotalIncome] = useState('')
     const [balance, setBalance] = useState('')
-    const [totalExpenses, setTotalExpenses] = useState()
+    const [totalExpenses, setTotalExpenses] = useState(0)
     const [ list, SetList] = useState([]);
     const [ amount, setAmount] = useState('')
     const [ item, setItem] = useState ('')
@@ -105,9 +105,9 @@ setTotalExpenses(preTotal => preTotal + newAmount);
 
       {
         <div className='flex gap-5'>
-        <ul>
+        <ul className='w-[100%]'>
           {list.map((list) => (
-            <li key={list.id} className='flex items-center justify-between  bg-[#2BA3EC] px-4 py-2 mt-2 w-[50vw] rounded-8'>
+            <li key={list.id} className='flex items-center justify-between  bg-[#2BA3EC] px-4 py-2 mt-2 w-[30vw] rounded-4'>
               <span className='text-xl '>{list.name}</span>
               <span className='text-lg'>${list.amount}</span>
               <FaTrash onClick={()=> deleteItem(list)} style={{ fontSize:'20px', color:'white'}} />
