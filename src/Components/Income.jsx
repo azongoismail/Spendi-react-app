@@ -9,7 +9,7 @@ const Income = () => {
     const [income, setIncome] = useState()
     const [totalIncome, setTotalIncome] = useState('')
     const [balance, setBalance] = useState('')
-    const [totalExpenses, setTotalExpenses] = useState(0)
+    const [totalExpenses, setTotalExpenses] = useState()
     const [ list, SetList] = useState([]);
     const [ amount, setAmount] = useState('')
     const [ item, setItem] = useState ('')
@@ -88,8 +88,8 @@ setTotalExpenses(preTotal => preTotal + newAmount);
 
   return (
     <>
-    <div className= "bg-[#EFEDCE] h-[100%] w-[50vw]  mx-auto my-4 flex justify-start items-center flex-col shadow-4xl rounded-2xl gap-10">
-        <p>Income:<span>${totalIncome}</span></p>
+    <div className= "bg-[#EFEDCE] h-[100%] w-[50vw]  mx-auto my-4 flex justify-start items-center flex-col shadow-4xl rounded-lg gap-10 md:w-[30%]">
+        <p className='text-2xl mt-6'>Income:<span>${totalIncome}</span></p>
       <form action="" onSubmit={handleIncomeSubmit} className='flex flex-col gap-5 items-center' >
         
         <input value={income} type="text" onChange={handleChange} className="bg-white p-3 mr-2" placeholder="enter income" />
@@ -97,7 +97,7 @@ setTotalExpenses(preTotal => preTotal + newAmount);
       </form>
     
       <form action="" onSubmit={handleExpensesSubmit} className='flex flex-col gap-5 my-4 items-center'>
-          <h2>Expenses</h2>
+          <h2 className='text-4xl'>Expenses</h2>
         <input type="text" value={item} className=" bg-white p-3 mr-3" placeholder=' add item' onChange={(e) => setItem(e.target.value)} />
         <input type="number" value={amount} className=" bg-white p-3 mr-3" placeholder='enter amount' onChange={(e) => setAmount(e.target.value)}/>
         <button className="add-item-btn">Add Item</button>
@@ -119,7 +119,8 @@ setTotalExpenses(preTotal => preTotal + newAmount);
       
      
     </div>
-    <Balance balance={balance} totalExpenses={totalExpenses} />
+     <Balance balance={balance} totalExpenses={totalExpenses} />
+   
     </>
   )
 
