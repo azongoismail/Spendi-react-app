@@ -98,9 +98,12 @@ setTotalExpenses(preTotal => preTotal + newAmount);
     
       <form action="" onSubmit={handleExpensesSubmit} className='flex flex-col gap-5 my-4 items-center'>
           <h2 className='text-4xl'>Expenses</h2>
-        <input type="text" value={item} className=" bg-white p-3 mr-3" placeholder=' add item' onChange={(e) => setItem(e.target.value)} />
-        <input type="number" value={amount} className=" bg-white p-3 mr-3" placeholder='enter amount' onChange={(e) => setAmount(e.target.value)}/>
-        <button className="add-item-btn">Add Item</button>
+          <div className='flex flex-col gap-4'>
+          <input type="text" value={item} className=" bg-white p-3 mr-3" placeholder=' add item' onChange={(e) => setItem(e.target.value)} />
+          <input type="number" value={amount} className=" bg-white p-3 mr-3" placeholder='enter amount' onChange={(e) => setAmount(e.target.value)}/>
+          <button className="add-item-btn">Add Item</button>
+          </div>
+        
       </form>
 
       {
