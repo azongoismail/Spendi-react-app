@@ -6,10 +6,17 @@ import Balance from './Balance';
 
 
 const Income = () => {
-    const [income, setIncome] = useState()
-    const [totalIncome, setTotalIncome] = useState('')
-    const [balance, setBalance] = useState('')
-    const [totalExpenses, setTotalExpenses] = useState(0)
+    const [income, setIncome] = useState();
+   const [totalIncome, setTotalIncome] = useState(() => {
+  const savedIncome = localStorage.getItem('totalIncome');
+  return savedIncome ? JSON.parse(savedIncome) : '';
+});
+
+    const [balance, setBalance] = useState('');
+    const [totalExpenses, setTotalExpenses] = useState(()=>{
+      const savedExpenses = localStorage.getItem("totalExpenses")
+      return savedExpenses ? JSON.parse(savedExpenses) : '';
+    })
     const [ list, SetList] = useState([]);
     const [ amount, setAmount] = useState('')
     const [ item, setItem] = useState ('')
@@ -20,25 +27,35 @@ const Income = () => {
       if (!isNaN(numericTotalIncome)) {
      setBalance(numericTotalIncome.toString());
    }
-
     }, [totalIncome]) 
+
+
+    // useEffect to store income to localstorage
+   useEffect(()=>{
+    localStorage.setItem('totalIncome',JSON.stringify(totalIncome))
+   },[totalIncome])
+
+   useEffect(()=>{
+    localStorage.setItem('totalExpenses',JSON.stringify(totalExpenses))
+   },[totalExpenses]);
+
 
     const handleChange = (e) => {
           setIncome(
           e.target.value
       )
     }
-
+// submit income
    
     const handleIncomeSubmit = (event) =>{
         event.preventDefault();
         const totalIncome = income;
-        setTotalIncome(totalIncome);
+        setTotalIncome(totalIncome)
         console.log(totalIncome)
         setIncome('');
     }
 
-    
+    // submit expenses
     const handleExpensesSubmit = (event) => {
         event.preventDefault();
         const newItem = {
@@ -70,7 +87,7 @@ setTotalExpenses(preTotal => preTotal + newAmount);
     }
 
 
-   
+   // delete items
    
   const deleteItem = (item) =>{
      const filteredItems = list.filter((list) => list.id !== item.id);
@@ -93,7 +110,7 @@ setTotalExpenses(preTotal => preTotal + newAmount);
       <form action="" onSubmit={handleIncomeSubmit} className='flex flex-col gap-5 items-center' >
         
         <input value={income} type="text" onChange={handleChange} className="bg-white p-3 mr-2" placeholder="enter income" />
-        <button className="add-income-btn ">Enter Income</button>
+        <button type="submit" className="add-income-btn ">Enter Income</button>
       </form>
     
       <form action="" onSubmit={handleExpensesSubmit} className='flex flex-col gap-5 my-4 items-center'>
@@ -101,7 +118,7 @@ setTotalExpenses(preTotal => preTotal + newAmount);
           <div className='flex flex-col gap-4'>
           <input type="text" value={item} className=" bg-white p-3 mr-3" placeholder=' add item' onChange={(e) => setItem(e.target.value)} />
           <input type="number" value={amount} className=" bg-white p-3 mr-3" placeholder='enter amount' onChange={(e) => setAmount(e.target.value)}/>
-          <button className="add-item-btn">Add Item</button>
+          <button type="submit"className="add-item-btn">Add Item</button>
           </div>
         
       </form>
