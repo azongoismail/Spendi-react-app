@@ -12,13 +12,21 @@ const Income = () => {
   return savedIncome ? JSON.parse(savedIncome) : '';
 });
 
-    const [balance, setBalance] = useState('');
+    const [balance, setBalance] = useState(()=>{
+      const savedBalance = localStorage.getItem("balance")
+      return savedBalance ? JSON.parse(savedBalance) : '';});
+
     const [totalExpenses, setTotalExpenses] = useState(()=>{
       const savedExpenses = localStorage.getItem("totalExpenses")
-      return savedExpenses ? JSON.parse(savedExpenses) : '';
+      return savedExpenses ? JSON.parse(savedExpenses) : 0;
     })
-    const [ list, SetList] = useState([]);
-    const [ amount, setAmount] = useState('')
+    const [ list, SetList] = useState(()=>{
+      const savedList = localStorage.getItem('list');
+      return savedList? JSON.parse(savedList) : []
+    });
+    const [ amount, setAmount] = useState(() => {
+  const saved = localStorage.getItem('amount');
+  return saved ? JSON.parse(saved) : '';})
     const [ item, setItem] = useState ('')
 
 
@@ -34,10 +42,26 @@ const Income = () => {
    useEffect(()=>{
     localStorage.setItem('totalIncome',JSON.stringify(totalIncome))
    },[totalIncome])
-
+// add totalExpenses to localStorage
    useEffect(()=>{
     localStorage.setItem('totalExpenses',JSON.stringify(totalExpenses))
    },[totalExpenses]);
+
+   // add amount to localStorage
+   useEffect(()=>{
+    localStorage.setItem('amount',JSON.stringify(amount))
+   },[amount]);
+
+   // add balance to localStorage
+   useEffect(()=>{
+    localStorage.setItem('balance',JSON.stringify(balance))
+   },[balance]);
+
+     useEffect(()=>{
+    localStorage.setItem('list',JSON.stringify(list))
+   },[list]);
+
+
 
 
     const handleChange = (e) => {
@@ -100,6 +124,8 @@ setTotalExpenses(preTotal => preTotal + newAmount);
      setTotalExpenses(newTotal);
 
   }
+
+  // localStorage.clear()
 
 
 
